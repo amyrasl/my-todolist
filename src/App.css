@@ -1,47 +1,112 @@
 .App {
-  text-align: center;
-}
-
-h1 {
-  color: #b89c6e;
-  font-size: 2rem;
-  margin-top: 60px;
+  /* text-align: center; */
+  align-content: center;
 }
 
 .todowrapper {
-  margin-top: 5rem;
   width: 30rem;
   height: 35rem;
   border-radius: 0.9rem;
   border: 8px solid #e2e1dc;
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: #b89c6e;
+  font-size: 2rem;
+  height: 15%;
+  align-self: center;
+  padding-top: 2rem;
+}
+
+.imageclass {
+  background-color: #f1eee7;
+}
+
+.todo-container {
+  width: 100%;
+  height: 75%;
+  background-color: #f1eee7ba;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  overflow-y: auto;
+}
+
+.todo-row {
+  /* width: 100%; */
+  /* background-color: red; */
+  border-bottom: 2px solid #cfcfcf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+.todo-content {
+  width: 70%;
 }
 
 .todoform {
-  padding: 0.75rem;
+  margin: 5%;
+  min-width: 85%;
+  height: 10%;
+  position: relative;
 }
 
 .todo-input {
   outline: none;
   padding: 1rem;
-  width: 90%;
-  height: 3rem;
-  flex-shrink: 0;
-  border-radius: 1.1875rem;
-  border: 1px solid #000;
-  background: #fff;
-}
-
-.todo-input:hover {
-  background-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
-}
-
-.todo-container {
   width: 100%;
-  height: 20rem;
-  background-color: #f1eee775;
-  /* background-color: red; */
-  /* opacity: 0.46; */
+  /* display: block; */
+  height: 3.5rem;
+  flex-shrink: 0;
+  border-radius: 1.1rem;
+  border: 1px solid black;
+  box-shadow: 0 1px 3px 0px #b89c6e;
+  align-self: center;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.button-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+footer > p {
+  font-size: 0.9rem;
 }
