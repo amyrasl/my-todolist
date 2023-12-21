@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Limelight&family=Sarala&display=swap");
 
 * {
-  font-family: "Catamaran", sans-serif;
+  font-family: "Sarala", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,7 +10,12 @@
 body {
   min-height: 100vh;
   /* overflow: hidden; */
-  background-color: #b2aea5;
+  background: linear-gradient(
+    243deg,
+    rgba(222, 96, 108, 0.5) 0%,
+    rgba(255, 237, 197, 0.5) 50%,
+    rgba(96, 136, 102, 0.5) 100%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
