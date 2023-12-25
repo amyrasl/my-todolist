@@ -4,39 +4,48 @@ import { Todo } from "./Todo";
 import { v4 as uuidv4 } from "uuid";
 
 export const TodoWrapper = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const storageTodos = localStorage.getItem("todos");
+    return storageTodos ? JSON.parse(storageTodos) : [];
+  });
 
   const addTodos = (todo) => {
-    setTodos([
-      ...todos,
-      {
-        id: uuidv4(),
-        task: todo,
-        completed: false,
-        isEditing: false,
-      },
-    ]);
+    const newTodos = [...todos, { id: uuidv4(), task: todo, completed: false }];
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const completedTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+    const newTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const removeTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const updateTodo = (task, id) => {
-    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, task } : todo)));
+    const newTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, task } : todo
+    );
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   useEffect(() => {
     // This effect runs after the component re-renders
-    // console.log("Updated Todos:", todos);
+    console.log("Updated Todos:", todos);
+    if (localStorage.getItem("todos")) {
+      console.log("true");
+    } else {
+      console.log("false");
+    }
+    console.log(localStorage);
   }, [todos]); // Dependency array ensures the effect runs only when 'todos' changes
 
   return (
@@ -57,6 +66,7 @@ export const TodoWrapper = () => {
           />
         ))}
       </div>
+      <button onClick={() => localStorage.clear()}>Click me</button>
       <TodoForm addTodos={addTodos} />
     </div>
   );
