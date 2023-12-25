@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import React, { useState, useRef, useLayoutEffect } from "react";
+import { HiOutlineTrash } from "react-icons/hi";
 import { IoSquareOutline } from "react-icons/io5";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { IconContext } from "react-icons";
@@ -8,11 +8,21 @@ export const Todo = ({ task, completedTodo, removeTodo, updateTodo }) => {
   const [text, setText] = useState(task.task);
   const textareaRef = useRef(null);
 
-  useEffect(() => {
-    textareaRef.current.style.height = "0px";
+  useLayoutEffect(() => {
     const scrollHeight = textareaRef.current.scrollHeight;
-    textareaRef.current.style.height = scrollHeight + "px";
-  }, [text]);
+    if (!task.completed) {
+      textareaRef.current.style.height = "0px";
+      textareaRef.current.style.height = scrollHeight + "px";
+    }
+  }, [task.completed, text]);
+
+  const handleEdit = (event) => {
+    if (event.target.value.length === 0 || /^\s*$/.test(event.target.value)) {
+      alert("Task could not be empty!");
+      return;
+    }
+    setText(event.target.value);
+  };
 
   const handleBlur = (event) => {
     event.preventDefault();
@@ -54,13 +64,16 @@ export const Todo = ({ task, completedTodo, removeTodo, updateTodo }) => {
             <IoSquareOutline onClick={() => completedTodo(task.id)} />
           </IconContext.Provider>
           <span className="todo-content">
-            <form id="myForm">
+            <form>
               <textarea
+                rows={1}
+                disabled={false}
                 ref={textareaRef}
                 value={text}
                 className="textclass"
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => handleEdit(e)}
                 onBlur={(e) => handleBlur(e)}
+                autoComplete="off"
               >
                 {task.task}
               </textarea>
@@ -72,10 +85,10 @@ export const Todo = ({ task, completedTodo, removeTodo, updateTodo }) => {
       <IconContext.Provider
         value={{
           color: "#FF8A8A",
-          size: "1.2rem",
+          size: "1rem",
         }}
       >
-        <IoCloseCircleOutline onClick={() => removeTodo(task.id)} />
+        <HiOutlineTrash onClick={() => removeTodo(task.id)} />
       </IconContext.Provider>
     </div>
   );

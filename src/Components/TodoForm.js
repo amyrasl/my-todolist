@@ -6,17 +6,19 @@ export const TodoForm = ({ addTodos }) => {
   const [value, setValue] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (value.length === 0 || /^\s*$/.test(value)) return;
     addTodos(value);
     setValue("");
   };
   return (
-    <form className="todoform" onSubmit={handleSubmit}>
+    <form id="text" className="todoform" onSubmit={handleSubmit}>
       <input
         type="text"
         className="todo-input"
         placeholder="Input your task here"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        autoComplete="off"
       />
       <button type="submit" className="button-with-icon">
         <IconContext.Provider

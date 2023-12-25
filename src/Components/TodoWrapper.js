@@ -36,22 +36,17 @@ export const TodoWrapper = () => {
 
   useEffect(() => {
     // This effect runs after the component re-renders
-    console.log("Updated Todos:", todos);
+    // console.log("Updated Todos:", todos);
   }, [todos]); // Dependency array ensures the effect runs only when 'todos' changes
 
   return (
     <div className="todowrapper">
-      <h1>Tell me your plans!</h1>
-      {todos.length === 0 && (
-        <img
-          className="imageclass"
-          src="\content.svg"
-          alt="My Happy SVG"
-          width="584px"
-          height="454.64px"
-        />
-      )}
+      <h1 className="title">Tell me your plans!</h1>
+
       <div className="todo-container">
+        {todos.length === 0 && (
+          <img className="imageclass" src="\content.svg" alt="my svg" />
+        )}
         {todos.map((todo) => (
           <Todo
             task={todo}
