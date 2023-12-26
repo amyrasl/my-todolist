@@ -11,14 +11,19 @@ export const TodoForm = ({ addTodos }) => {
     setValue("");
   };
   return (
-    <form id="text" className="todoform" onSubmit={handleSubmit}>
+    <form
+      id="text"
+      className="todoform"
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       <input
+        name="myText"
         type="text"
         className="todo-input"
         placeholder="Input your task here"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        autoComplete="off"
       />
       <button type="submit" className="button-with-icon">
         <IconContext.Provider

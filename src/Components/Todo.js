@@ -43,6 +43,7 @@ export const Todo = ({ task, completedTodo, removeTodo, updateTodo }) => {
           </IconContext.Provider>
           <span className="todo-content">
             <textarea
+              name="myText"
               rows={1}
               disabled={true}
               ref={textareaRef}
@@ -64,8 +65,9 @@ export const Todo = ({ task, completedTodo, removeTodo, updateTodo }) => {
             <IoSquareOutline onClick={() => completedTodo(task.id)} />
           </IconContext.Provider>
           <span className="todo-content">
-            <form>
+            <form id="text">
               <textarea
+                name="myText"
                 rows={1}
                 disabled={false}
                 ref={textareaRef}
