@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
 import { Todo } from "./Todo";
 import { v4 as uuidv4 } from "uuid";
@@ -37,21 +37,9 @@ export const TodoWrapper = () => {
     localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
-  useEffect(() => {
-    // This effect runs after the component re-renders
-    console.log("Updated Todos:", todos);
-    if (localStorage.getItem("todos")) {
-      console.log("true");
-    } else {
-      console.log("false");
-    }
-    console.log(localStorage);
-  }, [todos]); // Dependency array ensures the effect runs only when 'todos' changes
-
   return (
     <div className="todowrapper">
       <h1 className="title">Tell me your plans!</h1>
-
       <div className="todo-container">
         {todos.length === 0 && (
           <img className="imageclass" src="\content.svg" alt="my svg" />
@@ -66,7 +54,6 @@ export const TodoWrapper = () => {
           />
         ))}
       </div>
-      <button onClick={() => localStorage.clear()}>Click me</button>
       <TodoForm addTodos={addTodos} />
     </div>
   );
